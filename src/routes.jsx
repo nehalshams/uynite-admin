@@ -6,8 +6,9 @@ import {
   ArrowRightOnRectangleIcon,
   UserPlusIcon,
 } from "@heroicons/react/24/solid";
-import { Home, Profile, Tables, Notifications } from "@/pages/dashboard";
-import { SignIn, SignUp } from "@/pages/auth";
+import { Home, Tables } from "@/pages/dashboard";
+import { SignIn } from "@/pages/auth";
+import { Auth } from "./layouts";
 
 const icon = {
   className: "w-5 h-5 text-inherit",
@@ -33,7 +34,7 @@ export const routes = [
         icon: <UserCircleIcon {...icon} />,
         name: "Sponsored Events",
         path: "/events",
-        element: <Profile />,
+        element: <div>Sponsored Event</div>,
       },
       {
         icon: <TableCellsIcon {...icon} />,
@@ -45,19 +46,19 @@ export const routes = [
         icon: <BellIcon {...icon} />,
         name: "Block User",
         path: "/block-list",
-        element: <Notifications />,
+        element: <div></div>,
       },
       {
         icon: <BellIcon {...icon} />,
         name: "Support",
         path: "/support",
-        element: <Notifications />,
+        element: <div>Block user</div>,
       },
       {
         icon: <BellIcon {...icon} />,
         name: "Setting",
         path: "/settings",
-        element: <Notifications />,
+        element: <div>Settings</div>,
       },
     ],
   },
@@ -68,7 +69,7 @@ export const routes = [
       {
         icon: <ArrowRightOnRectangleIcon {...icon} />,
         name: "sign in",
-        path: "/sign-in",
+        path: "/auth",
         element: <SignIn />,
         keys: "auth",
       },
