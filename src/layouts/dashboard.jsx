@@ -10,6 +10,7 @@ import {
 import routes from "@/routes";
 import { useMaterialTailwindController, setOpenConfigurator } from "@/context";
 import Logo from '../Assets/Logo.png'
+import { NavOptions } from "@/pages/dashboard/Navoption";
 
 export function Dashboard() {
   const [controller, dispatch] = useMaterialTailwindController();
@@ -18,7 +19,7 @@ export function Dashboard() {
   return (
     <div className="min-h-screen  bg-blue-gray-50/50">
       <Sidenav
-        routes={routes}
+        routes={NavOptions}
         brandImg={
           // sidenavType === "dark" ? "/img/logo-ct.png" : "/img/logo-ct-dark.png"
           <img src={Logo}/>
@@ -27,7 +28,7 @@ export function Dashboard() {
       <div className="p-4 xl:ml-80 ">
         <DashboardNavbar />
         <Configurator />
-        <IconButton
+        {/* <IconButton
           size="lg"
           color="white"
           className="fixed bottom-8 right-8 z-40 rounded-full shadow-blue-gray-900/10"
@@ -35,7 +36,7 @@ export function Dashboard() {
           onClick={() => setOpenConfigurator(dispatch, true)}
         >
           <Cog6ToothIcon className="h-5 w-5" />
-        </IconButton>
+        </IconButton> */}
         <Routes>
           {routes.map(
             ({ layout, pages }) =>

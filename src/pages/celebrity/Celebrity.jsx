@@ -9,7 +9,6 @@ import {
   Progress,
   Input,
   Button,
-  Textarea,
 } from "@material-tailwind/react";
 import { EllipsisVerticalIcon } from "@heroicons/react/24/outline";
 import { authorsTableData, projectsTableData } from "@/data";
@@ -17,9 +16,20 @@ import Dropdown from "@/components/Dropdown";
 import Modal from "@/components/Modal";
 import { useState } from "react";
 
-export function Tables({ thead, tableHeading, statusOption }) {
+export function Celebrity({ tableHeading = "Celebrities", subheading, statusOption }) {
   const [state, setState] = useState({});
-  const { openModal, actionType, confirmationModal, rejectModal } = state;
+  
+  const { openModal,  selectedStatus } = state;
+
+  const thead = [
+    "S.N",
+    "Select All",
+    "Profile",
+    "ID Proof 1",
+    "ID Proof 2",
+    "URL",
+    "Status",
+  ];
 
   const celebrityOption = [
     { name: "All" },
@@ -32,25 +42,9 @@ export function Tables({ thead, tableHeading, statusOption }) {
     setState({ ...state, openModal: true });
   };
 
-  const handleAction = (e) => {
-    if (e === "Open") {
-    } else if (e === "Reject user") {
-      setState({ ...state, rejectModal: true });
-    } else setState({ ...state, actionType: e, confirmationModal: true });
-  };
-
-  const modalData = {
-    "Block user": {
-      heading: "Reason for blocking",
-      btn: "Block user",
-    },
-    "Delete user": {
-      heading: "Reason for delete",
-      btn: "Delete user",
-    },
-  }[actionType];
-  const closedReport = true;
-
+  const handleStatus = (value) => {
+    setState({ ...state, selectedStatus: value})
+  }
   const ModalHeader = () => {
     return (
       <div className="flex w-full items-center gap-4">
@@ -59,30 +53,19 @@ export function Tables({ thead, tableHeading, statusOption }) {
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSrdB8rRgA1qgkw0ckcTrhIa0kpV2ILvbMWg&usqp=CAU"
           }
           alt={""}
-          size="xl"
+          size="xxl"
         />
         <div>
-          <div className="flex items-center gap-1">
-            <Typography
-              variant="small"
-              color="blue-gray"
-              className="font-semibold"
-            >
-              {"Nhhasas"}
-            </Typography>
-            <Typography variant="small">reported</Typography>
-            <Typography
-              color="blue-gray"
-              className="font-semibold"
-              variant="small"
-            >
-              Raj Kumar
-            </Typography>
-            <Typography className="text-xs font-normal text-blue-gray-500">
-              {"ggrt@yopmail.com"}
-            </Typography>
-          </div>
-          <Typography variant='small'>22/04/2023</Typography>
+          <Typography
+            variant="small"
+            color="blue-gray"
+            className="font-semibold"
+          >
+            {"Nhhasas"}
+          </Typography>
+          <Typography className="text-xs font-normal text-blue-gray-500">
+            {"ggrt@yopmail.com"}
+          </Typography>
         </div>
         <Typography
           as="a"
@@ -113,12 +96,14 @@ export function Tables({ thead, tableHeading, statusOption }) {
                 );
               })} */}
 
-              <Typography className="text-sm">Open 43 |</Typography>
-              <Typography className="text-sm">Delete 75 |</Typography>
+              <Typography className="text-sm">Pending 66 |</Typography>
+              <Typography className="text-sm">Pending 66 |</Typography>
             </div>
           </div>
           <div className="ml-auto overflow-visible">
-            <Dropdown label={"Select Status"} options={statusOption} />
+            <Dropdown label={"Select Status"} options={celebrityOption} handleDropdown={handleStatus}
+              selectedValue={selectedStatus}
+            />
           </div>
         </CardHeader>
         <CardBody className="overflow-x-scroll px-0 pt-0 pb-2">
@@ -180,50 +165,39 @@ export function Tables({ thead, tableHeading, statusOption }) {
                         </div>
                       </td>
                       <td className={className}>
-                        <Typography variant="small" color="blue-gray">
-                          Harrasment
+                        <img
+                          className="max-w-[60px]"
+                          src={
+                            "https://imgk.timesnownews.com/story/1566234362-Pan_Card.jpg?tr=w-1200,h-900"
+                          }
+                        />
+                      </td>
+                      <td className={className}>
+                        <img
+                          className="max-w-[60px]"
+                          src={
+                            "https://imgk.timesnownews.com/story/1566234362-Pan_Card.jpg?tr=w-1200,h-900"
+                          }
+                        />
+                      </td>
+                      <td className={className}>
+                        <Typography className="text-xs text-blue-gray-600">
+                          wwww.worldmap.com
+                        </Typography>
+                        <Typography className="text-xs text-blue-gray-600">
+                          wwww.worldmap.com
+                        </Typography>
+                        <Typography className="text-xs  text-blue-gray-600">
+                          wwww.worldmap.com
                         </Typography>
                       </td>
-                      <td
-                        className={className}
-                        onClick={() => handleProfileClick(name)}
-                      >
-                        <div className="flex items-center gap-4">
-                          <Avatar src={img} alt={name} size="sm" />
-                          <div>
-                            <Typography
-                              variant="small"
-                              color="blue-gray"
-                              className="font-semibold"
-                            >
-                              {name}
-                            </Typography>
-                            <Typography className="text-xs font-normal text-blue-gray-500">
-                              reporte to {name}
-                            </Typography>
-                          </div>
-                        </div>
-                      </td>
                       <td className={className}>
-                        {closedReport ? (
-                          <Typography variant="small">
-                            Report post was deleted
-                          </Typography>
-                        ) : (
-                          <Dropdown
-                            handleDropdown={handleAction}
-                            label={"Report status"}
-                            options={[
-                              { name: "Open" },
-                              { name: "Block user" },
-                              { name: "Delete user" },
-                              { name: "Reject user" },
-                            ]}
-                          />
-                        )}
-                      </td>
-                      <td className={className}>
-                        <Input disabled value={"This user is fake"} />
+                        <Typography
+                          href="#"
+                          className="text-xs font-semibold text-blue-gray-600"
+                        >
+                          {status}
+                        </Typography>
                       </td>
                     </tr>
                   );
@@ -236,105 +210,60 @@ export function Tables({ thead, tableHeading, statusOption }) {
 
       {
         <Modal
-          size={"md"}
           modalHeader={<ModalHeader />}
           openModal={openModal}
           handleOpen={() => setState({ ...state, openModal: false })}
         >
-          <Typography
-            color="blue-gray"
-            className="border-bottom-blue-gray-700 mb-3 border border-b-2"
+          <div
+            className="flex gap-2
+          "
           >
-            This is the post content related to reported post
-          </Typography>
-          <div className="flex justify-center">
-            <div className="w-2/3">
+            <div>
               <img
                 className="min-h-[180px]"
                 src={
                   "https://images.template.net/wp-content/uploads/2019/06/College-ID-Card-.jpg"
                 }
               />
+              <Typography color="blue-gray" className="text-center">
+                ID Name
+              </Typography>
             </div>
-          </div>
-          <div className="my-3 flex justify-center gap-3">
-            <div className="flex justify-center gap-5">
-              <Button
-                variant="gradient"
-                fullWidth
-                color="orange"
-                // onClick={() }
-              >
-                Block
-              </Button>
-              <Button
-                variant="gradient"
-                fullWidth
-                color="red"
-                // onClick={() }
-              >
-                Delete
-              </Button>
-              <Button
-                variant="gradient"
-                fullWidth
-                // onClick={() }
-              >
-                Reject
-              </Button>
+            <div>
+              <img
+                className="min-h-[180px]"
+                src={
+                  "https://images.template.net/wp-content/uploads/2019/06/College-ID-Card-.jpg"
+                }
+              />
+              <Typography color="blue-gray" className="text-center ">
+                ID Name
+              </Typography>
             </div>
+            <div></div>
           </div>
-        </Modal>
-      }
 
-      {
-        <Modal
-          modalHeader={
-            <div className="w-full text-center">{modalData?.heading}</div>
-          }
-          openModal={confirmationModal}
-          handleOpen={() => setState({ ...state, confirmationModal: false })}
-        >
-          <Textarea label="Type your feedback here" />
-          <Button
-            variant="gradient"
-            fullWidth
-            color="red"
-            className="mt-4"
-            // onClick={() }
-          >
-            {modalData?.btn}
-          </Button>
-        </Modal>
-      }
-      {
-        <Modal
-          size={"sm"}
-          confirmBtn={
-            <Button variant="text" color="#685767" className="mr-3">
-              <span>Yes</span>
-            </Button>
-          }
-          modalHeader={
-            <Typography className="text-md">Are you sure?</Typography>
-          }
-          openModal={rejectModal}
-          handleOpen={() => setState({ ...state, rejectModal: false })}
-        >
-          <Typography className="text-gray-900">
-            Are you sure to reject this report, this will delete the report.
-          </Typography>
-          {/* <div className="flex justify-end">
-
+          <div className="flex gap-3">
+            <Input disabled value={"www.myurl.com "} />
+            <Input disabled value={"www.myproof.com"} />
+          </div>
+          <div className="my-3 flex gap-3">
             <Button
               variant="gradient"
-              color="red"
-              className="mt-4 mr-4"
+              fullWidth
               // onClick={() }
             >
-              Yes
+              Confirm
             </Button>
-          </div> */}
+            <Button
+              variant="gradient"
+              fullWidth
+              color="red"
+              // onClick={() }
+            >
+              Reject
+            </Button>
+          </div>
         </Modal>
       }
       {/* <Card>
@@ -450,4 +379,4 @@ export function Tables({ thead, tableHeading, statusOption }) {
   );
 }
 
-export default Tables;
+export default Celebrity;

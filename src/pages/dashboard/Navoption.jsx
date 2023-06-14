@@ -8,20 +8,14 @@ import {
 } from "@heroicons/react/24/solid";
 import { Home, Tables } from "@/pages/dashboard";
 import { SignIn } from "@/pages/auth";
-import { Auth } from "./layouts";
-import Events from "./pages/dashboard/Events";
-import CreateEvent from "./pages/events/CreateEvent";
-import Report from "./pages/report/Report";
-import Celebrity from "./pages/celebrity/Celebrity";
-import Support from "./pages/Support/Support";
-import Setting from "./pages/settings/Setting";
-import Block from "./pages/block/Block";
+import Events from "@/pages/dashboard/Events";
+import CreateEvent from "@/pages/events/CreateEvent";
+import EventTable from "@/pages/events/EventList";
 
 const icon = {
   className: "w-5 h-5 text-inherit",
 };
-
-export const routes = [
+export const NavOptions = [
   {
     layout: "dashboard",
     pages: [
@@ -35,7 +29,7 @@ export const routes = [
         icon: <HomeIcon {...icon} />,
         name: "Celebrity Request",
         path: "/celebrity",
-        element: <Celebrity />,
+        element: <Tables />,
       },
       {
         icon: <UserCircleIcon {...icon} />,
@@ -47,40 +41,25 @@ export const routes = [
         icon: <TableCellsIcon {...icon} />,
         name: "Reports",
         path: "/reports",
-        element: <Report />,
+        element: <Tables />,
       },
       {
         icon: <BellIcon {...icon} />,
         name: "Block User",
         path: "/block-list",
-        element: <Block/>,
+        element: <div></div>,
       },
       {
         icon: <BellIcon {...icon} />,
         name: "Support",
         path: "/support",
-        // element: <Support/>,
-        element: <div>Support</div>
+        element: <div>Block user</div>,
       },
       {
         icon: <BellIcon {...icon} />,
         name: "Setting",
         path: "/settings",
-        // element: <Setting/>,
-        element: <div>Setting</div>
-
-      },
-      {
-        icon: <BellIcon {...icon} />,
-        name: "Create Event",
-        path: "/create-event",
-        element: <CreateEvent />,
-      },
-      {
-        icon: <BellIcon {...icon} />,
-        name: "Create Event",
-        path: "/dashboard/profile",
-        element: <div>User Profile</div>,
+        element: <div>Settings</div>,
       },
     ],
   },
@@ -105,5 +84,3 @@ export const routes = [
     ],
   },
 ];
-
-export default routes;

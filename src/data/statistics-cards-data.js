@@ -34,7 +34,7 @@ export const statisticsCardsData = [
     color: "pink",
     icon: UserIcon,
     title: "Sponsored Event",
-    path: '/dashboard/event',
+    path: '/dashboard/events',
     value: "2,300",
     footer: [
       {

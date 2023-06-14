@@ -17,7 +17,7 @@ import Dropdown from "@/components/Dropdown";
 import Modal from "@/components/Modal";
 import { useState } from "react";
 
-export function Tables({ thead, tableHeading, statusOption }) {
+export function SupportTable({ thead, tableHeading, statusOption }) {
   const [state, setState] = useState({});
   const { openModal, actionType, confirmationModal, rejectModal } = state;
 
@@ -27,6 +27,10 @@ export function Tables({ thead, tableHeading, statusOption }) {
     { name: "Verified" },
     { name: "Rejected" },
   ];
+
+  const filterOption = [
+    { name: 'Open issues'}, { name: 'Replied issues'}, { name: 'Ignored issues'}
+  ]
 
   const handleProfileClick = (name) => {
     setState({ ...state, openModal: true });
@@ -82,7 +86,7 @@ export function Tables({ thead, tableHeading, statusOption }) {
               {"ggrt@yopmail.com"}
             </Typography>
           </div>
-          <Typography variant='small'>22/04/2023</Typography>
+          <Typography variant="small">22/04/2023</Typography>
         </div>
         <Typography
           as="a"
@@ -104,7 +108,7 @@ export function Tables({ thead, tableHeading, statusOption }) {
         >
           <div>
             <Typography variant="h4" color="white">
-              {tableHeading}
+              {"Supports"}
             </Typography>
             <div className="flex gap-2">
               {/* {subheading.map((item) => {
@@ -113,19 +117,20 @@ export function Tables({ thead, tableHeading, statusOption }) {
                 );
               })} */}
 
-              <Typography className="text-sm">Open 43 |</Typography>
-              <Typography className="text-sm">Delete 75 |</Typography>
+              <Typography className="text-sm">Open issues 43 |</Typography>
+              <Typography className="text-sm">Replied issues 75 |</Typography>
+              <Typography className="text-sm">Ignored issues 15 |</Typography>
             </div>
           </div>
           <div className="ml-auto overflow-visible">
-            <Dropdown label={"Select Status"} options={statusOption} />
+            <Dropdown label={"Select Status"} options={filterOption} />
           </div>
         </CardHeader>
         <CardBody className="overflow-x-scroll px-0 pt-0 pb-2">
           <table className="w-full min-w-[640px] table-auto">
             <thead>
               <tr>
-                {thead.map((el) => (
+                {['S.N', 'Select All', 'Profile', 'Issues details', 'Reply',  ].map((el) => (
                   <th
                     key={el}
                     className="border-b border-blue-gray-50 py-3 px-5 text-left"
@@ -161,7 +166,7 @@ export function Tables({ thead, tableHeading, statusOption }) {
                       </td>
                       <td
                         className={className}
-                        onClick={() => handleProfileClick(name)}
+                        // onClick={() => handleProfileClick(name)}
                       >
                         <div className="flex items-center gap-4">
                           <Avatar src={img} alt={name} size="sm" />
@@ -180,50 +185,26 @@ export function Tables({ thead, tableHeading, statusOption }) {
                         </div>
                       </td>
                       <td className={className}>
-                        <Typography variant="small" color="blue-gray">
-                          Harrasment
-                        </Typography>
+                        <Input
+                          disabled
+                          value={"This is issues is raised by user"}
+                        />
                       </td>
                       <td
                         className={className}
-                        onClick={() => handleProfileClick(name)}
+                        // onClick={() => handleProfileClick(name)}
                       >
                         <div className="flex items-center gap-4">
-                          <Avatar src={img} alt={name} size="sm" />
-                          <div>
-                            <Typography
-                              variant="small"
-                              color="blue-gray"
-                              className="font-semibold"
-                            >
-                              {name}
-                            </Typography>
-                            <Typography className="text-xs font-normal text-blue-gray-500">
-                              reporte to {name}
-                            </Typography>
-                          </div>
+                          <Input label="Reply" />
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="currentColor"
+                            className="h-6 w-6"
+                          >
+                            <path d="M3.478 2.405a.75.75 0 00-.926.94l2.432 7.905H13.5a.75.75 0 010 1.5H4.984l-2.432 7.905a.75.75 0 00.926.94 60.519 60.519 0 0018.445-8.986.75.75 0 000-1.218A60.517 60.517 0 003.478 2.405z" />
+                          </svg>
                         </div>
-                      </td>
-                      <td className={className}>
-                        {closedReport ? (
-                          <Typography variant="small">
-                            Report post was deleted
-                          </Typography>
-                        ) : (
-                          <Dropdown
-                            handleDropdown={handleAction}
-                            label={"Report status"}
-                            options={[
-                              { name: "Open" },
-                              { name: "Block user" },
-                              { name: "Delete user" },
-                              { name: "Reject user" },
-                            ]}
-                          />
-                        )}
-                      </td>
-                      <td className={className}>
-                        <Input disabled value={"This user is fake"} />
                       </td>
                     </tr>
                   );
@@ -337,117 +318,8 @@ export function Tables({ thead, tableHeading, statusOption }) {
           </div> */}
         </Modal>
       }
-      {/* <Card>
-        <CardHeader variant="gradient" color="blue" className="mb-8 p-6">
-          <Typography variant="h6" color="white">
-            Projects Table
-          </Typography>
-        </CardHeader>
-        <CardBody className="overflow-x-scroll px-0 pt-0 pb-2">
-          <table className="w-full min-w-[640px] table-auto">
-            <thead>
-              <tr>
-                {["companies", "members", "budget", "completion", ""].map(
-                  (el) => (
-                    <th
-                      key={el}
-                      className="border-b border-blue-gray-50 py-3 px-5 text-left"
-                    >
-                      <Typography
-                        variant="small"
-                        className="text-[11px] font-bold uppercase text-blue-gray-400"
-                      >
-                        {el}
-                      </Typography>
-                    </th>
-                  )
-                )}
-              </tr>
-            </thead>
-            <tbody>
-              {projectsTableData.map(
-                ({ img, name, members, budget, completion }, key) => {
-                  const className = `py-3 px-5 ${
-                    key === projectsTableData.length - 1
-                      ? ""
-                      : "border-b border-blue-gray-50"
-                  }`;
-
-                  return (
-                    <tr key={name}>
-                      <td className={className}>
-                        <div className="flex items-center gap-4">
-                          <Avatar src={img} alt={name} size="sm" />
-                          <Typography
-                            variant="small"
-                            color="blue-gray"
-                            className="font-bold"
-                          >
-                            {name}
-                          </Typography>
-                        </div>
-                      </td>
-                      <td className={className}>
-                        {members.map(({ img, name }, key) => (
-                          <Tooltip key={name} content={name}>
-                            <Avatar
-                              src={img}
-                              alt={name}
-                              size="xs"
-                              variant="circular"
-                              className={`cursor-pointer border-2 border-white ${
-                                key === 0 ? "" : "-ml-2.5"
-                              }`}
-                            />
-                          </Tooltip>
-                        ))}
-                      </td>
-                      <td className={className}>
-                        <Typography
-                          variant="small"
-                          className="text-xs font-medium text-blue-gray-600"
-                        >
-                          {budget}
-                        </Typography>
-                      </td>
-                      <td className={className}>
-                        <div className="w-10/12">
-                          <Typography
-                            variant="small"
-                            className="mb-1 block text-xs font-medium text-blue-gray-600"
-                          >
-                            {completion}%
-                          </Typography>
-                          <Progress
-                            value={completion}
-                            variant="gradient"
-                            color={completion === 100 ? "green" : "blue"}
-                            className="h-1"
-                          />
-                        </div>
-                      </td>
-                      <td className={className}>
-                        <Typography
-                          as="a"
-                          href="#"
-                          className="text-xs font-semibold text-blue-gray-600"
-                        >
-                          <EllipsisVerticalIcon
-                            strokeWidth={2}
-                            className="h-5 w-5 text-inherit"
-                          />
-                        </Typography>
-                      </td>
-                    </tr>
-                  );
-                }
-              )}
-            </tbody>
-          </table>
-        </CardBody>
-      </Card> */}
     </div>
   );
 }
 
-export default Tables;
+export default SupportTable;

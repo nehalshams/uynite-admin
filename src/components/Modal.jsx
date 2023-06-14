@@ -7,9 +7,9 @@ import {
 } from "@material-tailwind/react";
 import React from "react";
 
-const Modal = ({ openModal, handleOpen, children, modalHeader }) => {
+const Modal = ({size, openModal, handleOpen, children, modalHeader, confirmBtn }) => {
   return (
-    <Dialog open={openModal} handler={handleOpen}>
+    <Dialog size={size} open={openModal} handler={handleOpen}>
       <DialogHeader>{modalHeader}</DialogHeader>
       <DialogBody className="flex-col" divider>
         {
@@ -17,6 +17,9 @@ const Modal = ({ openModal, handleOpen, children, modalHeader }) => {
         }
       </DialogBody>
       <DialogFooter>
+      {
+        confirmBtn && confirmBtn
+      }
         <Button
           variant="text"
           color="red"
@@ -25,9 +28,7 @@ const Modal = ({ openModal, handleOpen, children, modalHeader }) => {
         >
           <span>Close</span>
         </Button>
-        {/* <Button variant="gradient" color="green" onClick={handleOpen}>
-          <span>Confirm</span>
-        </Button> */}
+    
       </DialogFooter>
     </Dialog>
   );
