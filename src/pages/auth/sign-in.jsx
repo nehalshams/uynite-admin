@@ -44,7 +44,7 @@ export function SignIn() {
             </Button>
             <Typography variant="small" className="mt-6 flex justify-center">
               Forgot password?
-              <Link to="/auth/sign-up">
+              {/* <Link to="/auth/sign-up">
                 <Typography
                   as="span"
                   variant="small"
@@ -53,7 +53,7 @@ export function SignIn() {
                 >
                   Click here
                 </Typography>
-              </Link>
+              </Link> */}
             </Typography>
           </CardFooter>
         </Card>
